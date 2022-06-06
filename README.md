@@ -1,2 +1,2 @@
 # Expense-Tracker
-Configuration and tracking expences
+Configuration and tracking expenses
