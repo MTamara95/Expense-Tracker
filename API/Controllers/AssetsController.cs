@@ -13,8 +13,7 @@ namespace API.Controllers
     public class AssetsController : BaseApiController
     {
         private readonly IMapper _mapper;
-
-        public IAssetRepository _assetRepo { get; }
+        private IAssetRepository _assetRepo;
 
         public AssetsController(IAssetRepository assetRepo, IMapper mapper)
         {

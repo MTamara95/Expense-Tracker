@@ -9,6 +9,10 @@ namespace API.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<AssetDto, Asset>();
+            CreateMap<Asset, AssetDto>();
+
+            CreateMap<ExpenseForPutPostDto, Expense>();
+            CreateMap<Expense, ExpenseDisplayDto>();
         }
     }
 }
