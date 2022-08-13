@@ -64,7 +64,7 @@ namespace API.Controllers
             }
 
             var userId = await GetUserId();
-            expense.AppUserId = userId;
+            expense.AppUserId = userId; // not happy with appUserId in the putpost model
             var createdExpense = await _expenseRepo.AddExpense(expense);
             var mappedExpense = _mapper.Map<ExpenseDisplayDto>(createdExpense);
             return CreatedAtAction(nameof(GetExpense), new { id = mappedExpense.Id }, mappedExpense);
