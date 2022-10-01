@@ -9,58 +9,18 @@
     </div>
 
     <div class="col-lg-6">
-        <form #createExpenseForm="ngForm" (ngSubmit)="createExpense()" class="bs-component">
+        <form [formGroup]="expenseForm" (ngSubmit)="createExpense()" class="bs-component">
 
-            <div class="row">
+            <app-dropdown [formControl]='expenseForm.controls["assetId"]' [label]='"Asset"' [options]='assets'>
+            </app-dropdown>
 
-                <div class="form-group mt-2 form-inline">
-                    <label class="col-form-label" for="inputDefault">Asset:</label>
-                    <div class="btn-group ml-2">
-                        <select [(ngModel)]="selectedAsset" name="assetsDropdown" class="btn btn-outline-success"
-                            (change)="onChange($event.target.value)">
-                            <option *ngFor="let asset of assets" [value]="asset.id" class="customDropdown">
-                                {{asset.name}}</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+            <app-date-input [formControl]='expenseForm.controls["purchaseDate"]' [label]='"Date"'
+                [maxDate]='currentDate'>
+            </app-date-input>
 
-            <!-- <div class="row">
-                <div class="form-group mt-2 form-inline">
-                    <label class="col-form-label" for="inputDefault">Asset:</label>
+            <app-number-input [formControl]='expenseForm.controls["amount"]' [label]='"Amount"'>
+            </app-number-input>
 
-                    <div class="btn-group ml-2" dropdown>
-                        <button id="button-basic" dropdownToggle type="button"
-                            class="btn btn-outline-success dropdown-toggle" aria-controls="dropdown-basic">
-                            {{selectedAsset?.name}} <span class="caret"></span>
-                        </button>
-
-                        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu"
-                            aria-labelledby="button-basic" [(ngModel)]="selectedAsset" name="assetsDropdown">
-                            <li role="menuitem" *ngFor="let asset of assets" [value]="asset.id">{{asset.name}}<a
-                                    class="dropdown-item"></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div> -->
-
-            <div class="row">
-                <div class="form-group mt-2 form-inline">
-                    <label class="col-form-label" for="inputDefault">Date:</label>
-                    <input type="text" autocomplete="off" placeholder="Select date..."
-                        class="form-control ml-2 datePicker" [(ngModel)]="expense.purchaseDate" name="date" bsDatepicker
-                        [minDate]="minimumDate" [maxDate]="currentDate">
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group mt-2 form-inline">
-                    <label class="col-form-label" for="inputDefault">Amount:</label>
-                    <input type="number" class="form-control ml-2" [(ngModel)]="expense.amount" name="amount"
-                        placeholder="Amount" id="inputDefault">
-                </div>
-            </div>
 
             <div class="row">
                 <div class="form-group mt-2">
@@ -72,13 +32,6 @@
 
     </div>
 </div>
-
-<!-- <div class="row">
-    <div class="col-2">
-        <p *ngFor="let expense of expenses">{{expense.amount}}; {{expense.asset.name}}; {{expense.purchaseDate | date:
-            'dd/MM/yyyy'}}</p>
-    </div>
-</div> -->
 
 <div class="bs-docs-section">
     <div class="row">

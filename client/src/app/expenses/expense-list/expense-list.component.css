@@ -11,12 +11,6 @@
     color: #02b875;
 }
 
-.datePicker {
-    background: url("/assets/img/calendaricon.png") no-repeat scroll;
-    background-size: 25px;
-    background-position: 95%;
-}
-
 .customDropdown {
     background-color: white;
     color: #02b875;

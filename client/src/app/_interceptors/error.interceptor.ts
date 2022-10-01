@@ -28,6 +28,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                     modalStateErrors.push(error.error.errors[key]);
                   }
                 }
+                this.toastr.error('Bad request', error.status);
                 throw modalStateErrors.flat();
               } else {
                 this.toastr.error('Bad request', error.status);

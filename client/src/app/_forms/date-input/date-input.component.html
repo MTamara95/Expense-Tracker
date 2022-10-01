@@ -1,0 +1,7 @@
+<div class="form-group mt-2 form-inline">
+    <label class="col-form-label" for="inputDefault">Date:</label>
+    <input type="text" [class.is-invalid]='ngControl.touched && ngControl.invalid' class="form-control ml-2 datePicker"
+        [formControl]='ngControl.control' placeholder="Select date..." bsDatepicker [bsConfig]="bsConfig"
+        [maxDate]="maxDate">
+    <div *ngIf="ngControl.control.errors?.required" class="invalid-feedback">{{label}} is required</div>
+</div>

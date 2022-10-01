@@ -1,0 +1,6 @@
+<div class="form-group mt-2 form-inline">
+    <label class="col-form-label" for="inputDefault">{{label}}:</label>
+    <input [class.is-invalid]='ngControl.touched && ngControl.invalid' type="number" class="form-control ml-2"
+        [formControl]="ngControl.control" placeholder="Amount" id="inputDefault">
+    <div *ngIf="ngControl.control.errors?.required" class="invalid-feedback">{{label}} is required</div>
+</div>

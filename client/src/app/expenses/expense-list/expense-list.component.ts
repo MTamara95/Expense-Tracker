@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Asset } from 'src/app/_models/asset';
 import { Expense } from 'src/app/_models/expense';
@@ -19,15 +20,27 @@ export class ExpenseListComponent implements OnInit {
   assets = [] as Asset[];
   selectedAsset: Asset;
   selectedAssetId: number;
+  model: any = {};
+  expenseForm: FormGroup;
 
-  constructor(private expenseService: ExpensesService, private toastr: ToastrService, private assetService: AssetService) {
+  constructor(private expenseService: ExpensesService, private toastr: ToastrService, private assetService: AssetService, private fb: FormBuilder) {
     this.bsRangeValue = [this.minimumDate, this.currentDate];
   }
 
   ngOnInit(): void {
+    this.initializeForm();
     this.loadExpenses();
     this.loadAssets();
   }
+
+  initializeForm() {
+    this.expenseForm = this.fb.group({
+      assetId: ['', Validators.required],
+      purchaseDate: ['', Validators.required],
+      amount: ['', Validators.required],
+    })
+  }
+
 
   loadExpenses() {
     this.expenseService.getExpenses().subscribe(expenses => {
@@ -44,7 +57,7 @@ export class ExpenseListComponent implements OnInit {
 
   createExpense() {
     this.expense.assetId = this.selectedAssetId;
-    this.expenseService.createExpense(this.expense).subscribe(response => {
+    this.expenseService.createExpense(this.expenseForm.value).subscribe(response => {
       console.log(response);
       this.loadExpenses();
       this.toastr.success("Expense added!", "Success!")
@@ -56,10 +69,6 @@ export class ExpenseListComponent implements OnInit {
       this.assets = assets;
       this.selectedAsset = assets[0];
     });
-  }
-
-  onChange(value: number) {
-    this.selectedAssetId = value;
   }
 
 }

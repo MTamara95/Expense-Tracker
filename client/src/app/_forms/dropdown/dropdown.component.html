@@ -1,0 +1,16 @@
+<div class="form-group mt-2 form-inline">
+    <label class="col-form-label" for="inputDefault">{{label}}:</label>
+
+    <div class="btn-group ml-2" dropdown>
+        <button id="button-basic" dropdownToggle type="button" class="btn btn-outline-success dropdown-toggle"
+            aria-controls="dropdown-basic">
+            {{selectedOption?.name || "Select an option:"}} <span class="caret"></span>
+        </button>
+
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+            <li role="menuitem" *ngFor="let option of options" (click)=" changeSelectedOption(option)"><a
+                    class="dropdown-item">{{option.name}}</a>
+            </li>
+        </ul>
+    </div>
+</div>
