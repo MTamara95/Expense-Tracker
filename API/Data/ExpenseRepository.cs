@@ -75,5 +75,12 @@ namespace API.Data
             }
             return null;
         }
+
+        public async Task<double> GetAllExpensesSum(int userId)
+        {
+            return await _context.Expenses
+                .Where(x => x.AppUserId == userId)
+                .SumAsync(x => x.Amount);
+        }
     }
 }

@@ -99,6 +99,16 @@ namespace API.Controllers
             return _mapper.Map<ExpenseDisplayDto>(result);
         }
 
+        [HttpGet("sum")]
+        public async Task<ActionResult<double>> GetTotalExpenses()
+        {
+            var userId = await GetUserId();
+
+            var sum = await _expenseRepo.GetAllExpensesSum(userId);
+            return Ok(sum);
+        }
+
+
 
         private async Task<int> GetUserId()
         {

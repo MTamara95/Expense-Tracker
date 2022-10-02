@@ -12,5 +12,6 @@ namespace API.Interfaces
         Task<Expense> AddExpense(ExpenseForPutPostDto expense);
         Task<Expense> UpdateExpense(int expenseId, ExpenseForPutPostDto expense, int userId);
         Task<Expense> DeleteExpense(int expenseId, int userId);
+        Task<double> GetAllExpensesSum(int userId);
     }
 }
