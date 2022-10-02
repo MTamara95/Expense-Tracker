@@ -1,0 +1,15 @@
+.dropdownDiv {
+    padding-left: 0%;
+    padding-right: 0%;
+    flex-shrink: inherit;
+}
+
+.dropdownButton {
+    border-radius: 0.25rem;
+    border-color: rgba(0, 0, 0, 0.1);
+    padding-left: 10%;
+    color: #868e96;
+    text-align: left;
+    font-size: 1.1rem;
+    width: 100%;
+}

@@ -3,3 +3,7 @@
     background-size: 25px;
     background-position: 95%;
 }
+
+.autoFlex {
+    flex: auto;
+}

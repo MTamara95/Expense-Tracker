@@ -1,9 +1,9 @@
 <div class="form-group mt-2 form-inline">
-    <label class="col-form-label" for="inputDefault">{{label}}:</label>
+    <label class="col-form-label col-lg-2 text-right" for="inputDefault">{{label}}:</label>
 
-    <div class="btn-group ml-2" dropdown>
-        <button id="button-basic" dropdownToggle type="button" class="btn btn-outline-success dropdown-toggle"
-            aria-controls="dropdown-basic">
+    <div class="ml-2 col-lg-6 dropdownDiv" dropdown>
+        <button id="button-basic" dropdownToggle type="button"
+            class="btn btn-outline-success dropdown-toggle dropdownButton" aria-controls="dropdown-basic">
             {{selectedOption?.name || "Select an option:"}} <span class="caret"></span>
         </button>
 
