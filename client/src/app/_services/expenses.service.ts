@@ -29,4 +29,8 @@ export class ExpensesService {
     return this.http.post(this.baseUrl + 'expenses', expense, httpOptions);
   }
 
+  getExpensesSum() {
+    return this.http.get<number>(this.baseUrl + 'expenses/sum', httpOptions);
+  }
+
 }

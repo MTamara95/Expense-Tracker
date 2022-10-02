@@ -22,6 +22,7 @@ export class ExpenseListComponent implements OnInit {
   selectedAssetId: number;
   model: any = {};
   expenseForm: FormGroup;
+  totalExpensesSum: number;
 
   constructor(private expenseService: ExpensesService, private toastr: ToastrService, private assetService: AssetService, private fb: FormBuilder) {
     this.bsRangeValue = [this.minimumDate, this.currentDate];
@@ -46,6 +47,9 @@ export class ExpenseListComponent implements OnInit {
     this.expenseService.getExpenses().subscribe(expenses => {
       this.expenses = expenses;
     });
+    this.expenseService.getExpensesSum().subscribe(sum => {
+      this.totalExpensesSum = sum;
+    })
   }
 
   deleteExpense(id: number) {
