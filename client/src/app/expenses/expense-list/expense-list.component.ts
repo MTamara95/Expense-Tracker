@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { map } from 'rxjs/operators';
 import { Asset } from 'src/app/_models/asset';
 import { Expense } from 'src/app/_models/expense';
 import { AssetService } from 'src/app/_services/asset.service';
@@ -24,7 +26,7 @@ export class ExpenseListComponent implements OnInit {
   expenseForm: FormGroup;
   totalExpensesSum: number;
 
-  constructor(private expenseService: ExpensesService, private toastr: ToastrService, private assetService: AssetService, private fb: FormBuilder) {
+  constructor(private expenseService: ExpensesService, private toastr: ToastrService, private assetService: AssetService, private fb: FormBuilder, private activatedRoute: ActivatedRoute) {
     this.bsRangeValue = [this.minimumDate, this.currentDate];
   }
 
@@ -44,9 +46,10 @@ export class ExpenseListComponent implements OnInit {
 
 
   loadExpenses() {
-    this.expenseService.getExpenses().subscribe(expenses => {
-      this.expenses = expenses;
+    this.activatedRoute.data.subscribe((data) => {
+      this.expenses = data?.expenses;
     });
+
     this.expenseService.getExpensesSum().subscribe(sum => {
       this.totalExpensesSum = sum;
     })
@@ -69,9 +72,9 @@ export class ExpenseListComponent implements OnInit {
   }
 
   loadAssets() {
-    this.assetService.getAssets().subscribe(assets => {
-      this.assets = assets;
-      this.selectedAsset = assets[0];
+    this.activatedRoute.data.subscribe((data) => {
+      this.assets = data?.assets;
+      this.selectedAsset = this.assets[0];
     });
   }
 

@@ -7,6 +7,8 @@ import { TestErrorsComponent } from './errors/test-errors/test-errors.component'
 import { ExpenseListComponent } from './expenses/expense-list/expense-list.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { AssetResolver } from './_resolvers/asset/asset.resolver';
+import { ExpenseResolver } from './_resolvers/expense/expense.resolver';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,7 +17,12 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-      { path: 'expenses', component: ExpenseListComponent },
+      {
+        path: 'expenses', component: ExpenseListComponent, resolve: {
+          expenses: ExpenseResolver,
+          assets: AssetResolver
+        }
+      },
       { path: 'assets', component: AssetListComponent },
     ]
   },
