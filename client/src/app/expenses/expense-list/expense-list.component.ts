@@ -32,7 +32,7 @@ export class ExpenseListComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeForm();
-    this.loadExpenses();
+    this.loadExpensesOnInit();
     this.loadAssets();
   }
 
@@ -45,10 +45,20 @@ export class ExpenseListComponent implements OnInit {
   }
 
 
-  loadExpenses() {
+  loadExpensesOnInit() {
     this.activatedRoute.data.subscribe((data) => {
       this.expenses = data?.expenses;
     });
+
+    this.expenseService.getExpensesSum().subscribe(sum => {
+      this.totalExpensesSum = sum;
+    })
+  }
+
+  loadExpenses() {
+    this.expenseService.getExpenses().subscribe(expenses => {
+      this.expenses = expenses;
+    })
 
     this.expenseService.getExpensesSum().subscribe(sum => {
       this.totalExpensesSum = sum;
