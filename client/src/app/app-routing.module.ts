@@ -23,7 +23,11 @@ const routes: Routes = [
           assets: AssetResolver
         }
       },
-      { path: 'assets', component: AssetListComponent },
+      {
+        path: 'assets', component: AssetListComponent, resolve: {
+          assets: AssetResolver
+        }
+      },
     ]
   },
   { path: 'errors', component: TestErrorsComponent },

@@ -1,5 +1,6 @@
-<div class="form-group">
-    <input [class.is-invalid]='ngControl.touched && ngControl.invalid' type={{type}} class="form-control"
+<div class="form-group mt-2 form-inline">
+    <label class="col-form-label col-lg-3 text-right" for="inputDefault">{{label}}:</label>
+    <input [class.is-invalid]='ngControl.touched && ngControl.invalid' type="text" class="form-control"
         [formControl]="ngControl.control" placeholder={{label}}>
 
     <div *ngIf="ngControl.control.errors?.required" class="invalid-feedback">Please enter {{label}}</div>

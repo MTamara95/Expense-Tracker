@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+.regularColumn {
+    width: 30%;
+}
+
+.shortColumn {
+    width: 10%;
+}
+
+.greenHeading {
+    margin-top: 20px;
+    color: #02b875;
+}
+
+.customDropdown {
+    background-color: white;
+    color: #02b875;
+}

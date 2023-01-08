@@ -1,1 +1,60 @@
-<p>asset-list works!</p>
+<div class="bs-docs-section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <h1 id="forms">Expense Tracker</h1>
+                <h3 id="forms" class="greenHeading">Add A New Asset:</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <form [formGroup]="assetForm" (ngSubmit)="createAsset()" class="bs-component">
+
+            <app-text-input [formControl]='assetForm.controls["name"]' [label]='"Name"'>
+            </app-text-input>
+
+            <app-text-input [formControl]='assetForm.controls["codeName"]' [label]='"Code Name"'>
+            </app-text-input>
+
+            <div class="row">
+                <div class="form-group mt-2">
+                    <button type="submit" class="btn btn-success">Add Asset</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<div class="bs-docs-section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <h1 id="tables">Assets</h1>
+            </div>
+            <div class="bs-component">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="regularColumn" scope="col">Name</th>
+                            <th class="regularColumn" scope="col">Code Name</th>
+                            <th class="shortColumn" scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-dark" *ngFor="let asset of assets">
+                            <td class="regularColumn">{{asset.name}}</td>
+                            <td class="regularColumn">{{asset.codeName}}</td>
+                            <td class="shortColumn">
+                                <button type="button" class="deleteBtn btn btn-outline-light rounded-1 btn-block"
+                                    (click)="deleteAssets(asset.id)">X</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

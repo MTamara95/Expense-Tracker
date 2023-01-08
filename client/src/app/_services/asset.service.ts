@@ -20,4 +20,12 @@ export class AssetService {
   getAssets() {
     return this.http.get<Asset[]>(this.baseUrl + 'assets', httpOptions);
   }
+
+  createAsset(asset: Asset) {
+    return this.http.post(this.baseUrl + 'assets', asset, httpOptions);
+  }
+
+  deleteAsset(id: number) {
+    return this.http.delete<Asset>(this.baseUrl + 'assets/' + id, httpOptions);
+  }
 }
