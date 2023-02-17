@@ -13,6 +13,8 @@ namespace API.Helpers
 
             CreateMap<ExpenseForPutPostDto, Expense>();
             CreateMap<Expense, ExpenseDisplayDto>();
+
+            CreateMap<RegisterDto, AppUser>();
         }
     }
 }

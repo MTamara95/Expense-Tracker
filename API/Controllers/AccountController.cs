@@ -1,6 +1,8 @@
-﻿using API.DTOs;
+﻿using API.Common;
+using API.DTOs;
 using API.Entities;
 using API.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,11 +14,13 @@ namespace API.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly ITokenService _tokenService;
+        private readonly IMapper _mapper;
 
-        public AccountController(UserManager<AppUser> userManager, ITokenService tokenService)
+        public AccountController(UserManager<AppUser> userManager, ITokenService tokenService, IMapper mapper)
         {
             _userManager = userManager;
             _tokenService = tokenService;
+            _mapper = mapper;
         }
 
         [HttpPost("register")]
@@ -24,20 +28,21 @@ namespace API.Controllers
         {
             if (await UserExists(registerDto.Username)) return BadRequest("Username is taken");
 
-            var user = new AppUser
-            {
-                UserName = registerDto.Username.ToLower()
-            };
+            var user = _mapper.Map<AppUser>(registerDto);
+            user.UserName = registerDto.Username.ToLower();
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
             if (!result.Succeeded) return BadRequest(result.Errors);
-               
+
+            var roleResult = await _userManager.AddToRoleAsync(user, RoleTypes.RegularUser);
+
+            if (!roleResult.Succeeded) return BadRequest(roleResult.Errors);
 
             return new UserDto
             {
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = await _tokenService.CreateToken(user)
             };
         }
 
@@ -55,7 +60,7 @@ namespace API.Controllers
             return new UserDto
             {
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = await _tokenService.CreateToken(user)
             };
         }
 

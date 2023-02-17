@@ -1,4 +1,5 @@
-﻿using API.Data;
+﻿using API.Common;
+using API.Data;
 using API.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,13 +19,14 @@ namespace API.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = RoleTypes.SuperAdmin)]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
             return await _context.Users.ToListAsync(); // use repo or remove this completely
         }
 
-        [Authorize]
+        [Authorize(Roles = RoleTypes.SuperAdmin)]
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUser(int id)
         {

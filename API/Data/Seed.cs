@@ -42,18 +42,6 @@ namespace API.Data
                .AddToRolesAsync(regularUser, new[] { RoleTypes.RegularUser });
         }
 
-        private static async Task<AppUser> AddSuperAdminUser(UserManager<AppUser> userManager)
-        {
-            var superAdmin = new AppUser { UserName = "superadmin" };
-            var admin = new AppUser { UserName = "admin" };
-            var regularUser = new AppUser { UserName = "regularuser" };
-
-            await userManager.CreateAsync(superAdmin, "Pa$$w0rd");
-            await userManager.CreateAsync(admin, "Pa$$w0rd");
-            await userManager.CreateAsync(regularUser, "Pa$$w0rd");
-            return superAdmin;
-        }
-
         private static void AddRoles(RoleManager<AppRole> roleManager)
         {
             var roles = new List<AppRole>
