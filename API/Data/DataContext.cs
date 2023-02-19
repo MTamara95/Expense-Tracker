@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
-    public class DataContext : IdentityDbContext<AppUser, AppRole, int, 
-        IdentityUserClaim<int>, AppUserRole, IdentityUserLogin<int>, 
+    public class DataContext : IdentityDbContext<AppUser, AppRole, int,
+        IdentityUserClaim<int>, AppUserRole, IdentityUserLogin<int>,
         IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
         public DataContext(DbContextOptions options) : base(options)
@@ -30,7 +30,7 @@ namespace API.Data
             builder.Entity<AppRole>()
                 .HasMany(ur => ur.UserRoles)
                 .WithOne(r => r.Role)
-                .HasForeignKey(ur => ur.UserId)
+                .HasForeignKey(ur => ur.RoleId)
                 .IsRequired();
         }
     }

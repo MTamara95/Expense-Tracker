@@ -1,4 +1,5 @@
-﻿using API.Data;
+﻿using API.Common;
+using API.Data;
 using API.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -34,6 +35,11 @@ namespace API.Extensions
                        ValidateAudience = false,
                    };
                });
+
+            services.AddAuthorization(opt =>
+            {
+                opt.AddPolicy("RequireSuperAdminRole", policy => policy.RequireRole(RoleTypes.SuperAdmin));
+            });
 
             return services;
         }
