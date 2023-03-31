@@ -20,6 +20,10 @@ import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
 import { NumberInputComponent } from './_forms/number-input/number-input.component';
 import { DropdownComponent } from './_forms/dropdown/dropdown.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './_directives/has-role.directive';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,11 @@ import { DropdownComponent } from './_forms/dropdown/dropdown.component';
     TextInputComponent,
     DateInputComponent,
     NumberInputComponent,
-    DropdownComponent
+    DropdownComponent,
+    AdminPanelComponent,
+    HasRoleDirective,
+    UserManagementComponent,
+    RolesModalComponent
   ],
   imports: [
     BrowserModule,
