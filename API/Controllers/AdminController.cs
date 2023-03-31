@@ -41,6 +41,9 @@ namespace API.Controllers
 
             var selectedRoles = roles.Split(",").ToArray();
 
+            if (selectedRoles.Any(x => string.IsNullOrEmpty(x)))
+                return BadRequest("Role assignment failed. You cannot send empty roles.");
+
             var user = await _userManager.FindByNameAsync(username);
 
             if (user == null) return NotFound();
