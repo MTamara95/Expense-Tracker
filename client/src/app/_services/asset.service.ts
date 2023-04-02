@@ -3,12 +3,6 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Asset } from '../_models/asset';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user'))?.token
-  })
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -18,14 +12,14 @@ export class AssetService {
   constructor(private http: HttpClient) { }
 
   getAssets() {
-    return this.http.get<Asset[]>(this.baseUrl + 'assets', httpOptions);
+    return this.http.get<Asset[]>(this.baseUrl + 'assets');
   }
 
   createAsset(asset: Asset) {
-    return this.http.post(this.baseUrl + 'assets', asset, httpOptions);
+    return this.http.post(this.baseUrl + 'assets', asset);
   }
 
   deleteAsset(id: number) {
-    return this.http.delete<Asset>(this.baseUrl + 'assets/' + id, httpOptions);
+    return this.http.delete<Asset>(this.baseUrl + 'assets/' + id);
   }
 }
