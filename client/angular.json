@@ -100,6 +100,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/ngx-spinner/animations/line-spin-fade.css",
               "src/styles.css"
             ],
             "scripts": []
