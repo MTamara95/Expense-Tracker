@@ -26,6 +26,7 @@ import { UserManagementComponent } from './admin/user-management/user-management
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
+import { LearnMoreComponent } from './learn-more/learn-more.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
     AdminPanelComponent,
     HasRoleDirective,
     UserManagementComponent,
-    RolesModalComponent
+    RolesModalComponent,
+    LearnMoreComponent
   ],
   imports: [
     BrowserModule,

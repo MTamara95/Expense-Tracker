@@ -11,6 +11,7 @@ import { AdminGuard } from './_guards/admin.guard';
 import { AuthGuard } from './_guards/auth.guard';
 import { AssetResolver } from './_resolvers/asset/asset.resolver';
 import { ExpenseResolver } from './_resolvers/expense/expense.resolver';
+import { LearnMoreComponent } from './learn-more/learn-more.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'errors', component: TestErrorsComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'server-error', component: ServerErrorComponent },
+  { path: 'learn-more', component: LearnMoreComponent },
   { path: '**', component: NotFoundComponent, pathMatch: 'full' }, // wildcard route
 ];
 
