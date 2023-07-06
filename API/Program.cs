@@ -3,6 +3,7 @@ using API.Entities;
 using API.Extensions;
 using API.Middleware;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -50,8 +51,8 @@ try
     var context = services.GetRequiredService<DataContext>();
     var userManager = services.GetRequiredService<UserManager<AppUser>>();
     var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
-    //context.Database.Migrate();
-    Seed.SeedUsers(userManager, roleManager);
+    await context.Database.MigrateAsync();
+    await Seed.SeedUsers(userManager, roleManager);
 }
 catch (Exception ex)
 {
