@@ -18,6 +18,20 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddCors();
 builder.Services.AddIdentityServices(builder.Configuration);
 
+var connString = "";
+if (builder.Environment.IsDevelopment())
+{
+    connString = builder.Configuration.GetConnectionString("DefaultConnection");
+}
+else // prod
+{
+    connString = Environment.GetEnvironmentVariable("CONN_URL");
+}
+builder.Services.AddDbContext<DataContext>(opt =>
+{
+    opt.UseNpgsql(connString);
+});
+
 // middleware
 var app = builder.Build();
 
