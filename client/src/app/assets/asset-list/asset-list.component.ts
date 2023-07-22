@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Asset } from 'src/app/_models/asset';
@@ -12,9 +12,9 @@ import { AssetService } from 'src/app/_services/asset.service';
 })
 export class AssetListComponent implements OnInit {
   assets: Asset[];
-  assetForm: FormGroup;
+  assetForm: UntypedFormGroup;
 
-  constructor(private assetService: AssetService, private toastr: ToastrService, private fb: FormBuilder, private activatedRoute: ActivatedRoute) { }
+  constructor(private assetService: AssetService, private toastr: ToastrService, private fb: UntypedFormBuilder, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.initializeForm();

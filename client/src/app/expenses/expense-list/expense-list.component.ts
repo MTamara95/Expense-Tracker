@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
@@ -23,10 +23,10 @@ export class ExpenseListComponent implements OnInit {
   selectedAsset: Asset;
   selectedAssetId: number;
   model: any = {};
-  expenseForm: FormGroup;
+  expenseForm: UntypedFormGroup;
   totalExpensesSum: number;
 
-  constructor(private expenseService: ExpensesService, private toastr: ToastrService, private assetService: AssetService, private fb: FormBuilder, private activatedRoute: ActivatedRoute) {
+  constructor(private expenseService: ExpensesService, private toastr: ToastrService, private assetService: AssetService, private fb: UntypedFormBuilder, private activatedRoute: ActivatedRoute) {
     this.bsRangeValue = [this.minimumDate, this.currentDate];
   }
 
