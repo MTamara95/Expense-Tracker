@@ -15,4 +15,10 @@
     </div>
 
     <div *ngIf=" ngControl.control.errors?.isMatching" class="invalid-feedback">Passwords do not match</div>
+
+    <div *ngIf=" ngControl.control.errors?.noUppercase" class="invalid-feedback">Passwords must have at least one uppercase</div>
+
+    <div *ngIf=" ngControl.control.errors?.noLowercase" class="invalid-feedback">Passwords must have at least one lowercase</div>
+
+    <div *ngIf=" ngControl.control.errors?.noDigit" class="invalid-feedback">Passwords must have at least one digit</div>
 </div>

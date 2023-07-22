@@ -22,7 +22,14 @@ export class RegisterComponent implements OnInit {
   initializeForm() {
     this.registerForm = this.fb.group({
       username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
+      password: ['', [
+        Validators.required, 
+        Validators.minLength(4), 
+        Validators.maxLength(16), 
+        this.containsUppercase(), 
+        this.containsLowercase(),
+        this.containsDigit()
+      ]],
       confirmPassword: ['', [Validators.required, this.matchValues('password')]],
     })
     this.registerForm.controls.password.valueChanges.subscribe(() => {
@@ -34,6 +41,42 @@ export class RegisterComponent implements OnInit {
     return (control: AbstractControl) => {
       return control?.value === control?.parent?.controls[matchTo].value ? null : { isMatching: true }
     }
+  }
+
+  containsUppercase(): ValidatorFn {
+    return (control: AbstractControl) => {
+      const password = control?.value as string;
+  
+      if (!password) return null;
+      
+      const containsUppercaseLetter = /[A-Z]/.test(password);
+  
+      return containsUppercaseLetter ? null : { noUppercase: true };
+    };
+  }
+
+  containsLowercase(): ValidatorFn {
+    return (control: AbstractControl) => {
+      const password = control?.value as string;
+  
+      if (!password) return null;
+      
+      const containsLowercaseLetter = /[a-z]/.test(password);
+  
+      return containsLowercaseLetter ? null : { noLowercase: true };
+    };
+  }
+
+  containsDigit(): ValidatorFn {
+    return (control: AbstractControl) => {
+      const password = control?.value as string;
+  
+      if (!password) return null;
+      
+      const containsDigit = /[0-9]/.test(password);
+  
+      return containsDigit ? null : { noDigit: true };
+    };
   }
 
   register() {
