@@ -27,6 +27,7 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { LearnMoreComponent } from './learn-more/learn-more.component';
+import { AboutMeComponent } from './about-me/about-me.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { LearnMoreComponent } from './learn-more/learn-more.component';
     HasRoleDirective,
     UserManagementComponent,
     RolesModalComponent,
-    LearnMoreComponent
+    LearnMoreComponent,
+    AboutMeComponent
   ],
   imports: [
     BrowserModule,
