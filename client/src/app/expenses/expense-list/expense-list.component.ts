@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
 import { Asset } from 'src/app/_models/asset';
 import { Expense } from 'src/app/_models/expense';
+import { Pagination } from 'src/app/_models/pagination';
 import { AssetService } from 'src/app/_services/asset.service';
 import { ExpensesService } from 'src/app/_services/expenses.service';
 
@@ -25,6 +26,10 @@ export class ExpenseListComponent implements OnInit {
   model: any = {};
   expenseForm: UntypedFormGroup;
   totalExpensesSum: number;
+  pagination: Pagination | undefined;
+  pageNumber = 1;
+  pageSize = 10;
+  pageSizes: number[] = [5, 10, 20, 50, 100];
 
   constructor(private expenseService: ExpensesService, private toastr: ToastrService, private assetService: AssetService, private fb: UntypedFormBuilder, private activatedRoute: ActivatedRoute) {
     this.bsRangeValue = [this.minimumDate, this.currentDate];
@@ -46,8 +51,12 @@ export class ExpenseListComponent implements OnInit {
 
 
   loadExpensesOnInit() {
-    this.activatedRoute.data.subscribe((data) => {
-      this.expenses = data?.expenses;
+    this.activatedRoute.data.subscribe(data => {
+      const resolvedData = data.expenses;
+      if (resolvedData) {
+        this.expenses = resolvedData.result;
+        this.pagination = resolvedData.pagination;
+      }
     });
 
     this.expenseService.getExpensesSum().subscribe(sum => {
@@ -56,8 +65,13 @@ export class ExpenseListComponent implements OnInit {
   }
 
   loadExpenses() {
-    this.expenseService.getExpenses().subscribe(expenses => {
-      this.expenses = expenses;
+    this.expenseService.getExpenses(this.pageNumber, this.pageSize).subscribe({
+      next: response => {
+        if (response.result && response.pagination) {
+          this.expenses = response.result;
+          this.pagination = response.pagination;
+        }
+      }
     })
 
     this.expenseService.getExpensesSum().subscribe(sum => {
@@ -88,4 +102,17 @@ export class ExpenseListComponent implements OnInit {
     });
   }
 
+  pageChanged(event: any) {
+    if (this.pageNumber !== event.page) {
+      this.pageNumber = event.page;
+      this.loadExpenses();
+    }
+  }
+
+  itemsPerPageChanged(event: any) {
+    if (this.pageSize !== event) {
+      this.pageSize = event;
+      this.loadExpenses();
+    }
+  }
 }

@@ -70,3 +70,25 @@
         </div>
     </div>
 </div>
+
+<div class="d-flex justify-content-center" *ngIf="pagination">
+    <pagination
+        [boundaryLinks]="true" 
+        [totalItems]="pagination.totalItems"
+        [itemsPerPage]="pagination.itemsPerPage"
+        [maxSize]="10"
+        [(ngModel)]="pagination.currentPage"
+        (pageChanged)="pageChanged($event)"
+        previousText="&lsaquo;" 
+        nextText="&rsaquo;" 
+        firstText="&laquo;" 
+        lastText="&raquo;"
+        class="mojStil">
+    </pagination>
+    <div class="ml-3">
+        <span>Items per page:</span>
+        <select class="ml-1" [(ngModel)]="pagination.itemsPerPage" (ngModelChange)="itemsPerPageChanged($event)">
+            <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+        </select>
+    </div>
+</div>
