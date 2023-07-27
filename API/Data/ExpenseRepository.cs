@@ -1,7 +1,9 @@
 ﻿using API.DTOs;
 using API.Entities;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +22,15 @@ namespace API.Data
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<Expense>> GetAllExpenses(int userId)
+        public async Task<PagedList<ExpenseDisplayDto>> GetAllExpenses(int userId, UserParams userParams)
         {
-            return await _context.Expenses
+            var query = _context.Expenses
                 .Where(x => x.AppUserId == userId)
                 .Include(x => x.Asset)
-                .ToListAsync();
+                .ProjectTo<ExpenseDisplayDto>(_mapper.ConfigurationProvider)
+                .AsNoTracking();
+
+            return await PagedList<ExpenseDisplayDto>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<Expense> GetExpense(int expenseId, int userId)

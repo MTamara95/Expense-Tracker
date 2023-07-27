@@ -1,5 +1,7 @@
 ﻿using API.DTOs;
 using API.Entities;
+using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -30,14 +32,16 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ExpenseDisplayDto>>> GetExpenses()
+        public async Task<ActionResult<IEnumerable<ExpenseDisplayDto>>> GetExpenses([FromQuery] UserParams userParams)
         {
             var userId = await GetUserId();
 
-            var expenses = await _expenseRepo.GetAllExpenses(userId);
-            var expensesForDisplay = _mapper
-                .Map<IEnumerable<ExpenseDisplayDto>>(expenses);
-            return Ok(expensesForDisplay);
+            var expenses = await _expenseRepo.GetAllExpenses(userId, userParams);
+
+            Response.AddPaginationHeader(new PaginationHeader(expenses.CurrentPage, expenses.PageSize,
+                expenses.TotalCount, expenses.TotalPages));
+
+            return Ok(expenses);
         }
 
         [HttpGet("{id}")]
@@ -71,7 +75,7 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<ExpenseDisplayDto>> UpdateExpense(int id, 
+        public async Task<ActionResult<ExpenseDisplayDto>> UpdateExpense(int id,
             ExpenseForPutPostDto expense)
         {
             var userId = await GetUserId();
