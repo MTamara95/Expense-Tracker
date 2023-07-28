@@ -1,11 +1,11 @@
-.mojStil::ng-deep .page-item.active .page-link {
+.paginationStyle::ng-deep .page-item.active .page-link {
     z-index: 1;
     color: #FFFFFF;
     background-color: #02b875 !important;
     border-color: #02b875;
 }
 
-.mojStil::ng-deep .page-link {
+.paginationStyle::ng-deep .page-link {
     z-index: 1;
     color: #02b875;
     background-color: #FFFFFF !important;
