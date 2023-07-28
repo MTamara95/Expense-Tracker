@@ -119,6 +119,9 @@ MIT
 ngx-bootstrap/modal
 MIT
 
+ngx-bootstrap/pagination
+MIT
+
 ngx-bootstrap/positioning
 MIT
 
