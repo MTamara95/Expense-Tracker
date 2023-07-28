@@ -11,3 +11,12 @@
     background-color: #FFFFFF !important;
     border-color: #02b875;
 }
+
+.table.table.table-hover {
+    margin-bottom: 0;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0px;
+}

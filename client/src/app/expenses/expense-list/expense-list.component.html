@@ -42,53 +42,52 @@
             <div class="bs-component">
                 <table class="table table-hover">
                     <thead>
-                        <tr>
-                            <th class="regularColumn" scope="col">Amount</th>
-                            <th class="regularColumn" scope="col">Asset</th>
-                            <th class="regularColumn" scope="col">Purchase Date</th>
+                        <tr class="row">
+                            <th class="col" scope="col">Amount</th>
+                            <th class="col" scope="col">Asset</th>
+                            <th class="col" scope="col">Purchase Date</th>
                             <th class="shortColumn" scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="table-dark" *ngFor="let expense of expenses">
-                            <td class="regularColumn">{{expense.amount}}</td>
-                            <td class="regularColumn">{{expense.asset.name}}</td>
-                            <td class="regularColumn">{{expense.purchaseDate | date: 'dd/MM/yyyy'}}</td>
+                        <tr class="table-dark row" *ngFor="let expense of expenses">
+                            <td class="col">{{expense.amount}}</td>
+                            <td class="col">{{expense.asset.name}}</td>
+                            <td class="col">{{expense.purchaseDate | date: 'dd/MM/yyyy'}}</td>
                             <td class="shortColumn">
                                 <button type="button" class="deleteBtn btn btn-outline-light rounded-1 btn-block"
                                     (click)="deleteExpense(expense.id)">X</button>
                             </td>
                         </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Total: {{totalExpensesSum}}</th>
+                        <tr class="table row">
+                            <td class="col"><b>Total: {{totalExpensesSum}}</b></td>
                         </tr>
-                    </tfoot>
+                    </tbody>
                 </table>
+                <div class="d-flex justify-content-center" *ngIf="pagination">
+                    <pagination
+                        [boundaryLinks]="true" 
+                        [totalItems]="pagination.totalItems"
+                        [itemsPerPage]="pagination.itemsPerPage"
+                        [maxSize]="10"
+                        [(ngModel)]="pagination.currentPage"
+                        (pageChanged)="pageChanged($event)"
+                        previousText="&lsaquo;" 
+                        nextText="&rsaquo;" 
+                        firstText="&laquo;" 
+                        lastText="&raquo;"
+                        class="mojStil">
+                    </pagination>
+                    <div class="ml-3">
+                        <span>Items per page:</span>
+                        <select class="ml-1" [(ngModel)]="pagination.itemsPerPage" (ngModelChange)="itemsPerPageChanged($event)">
+                            <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="d-flex justify-content-center" *ngIf="pagination">
-    <pagination
-        [boundaryLinks]="true" 
-        [totalItems]="pagination.totalItems"
-        [itemsPerPage]="pagination.itemsPerPage"
-        [maxSize]="10"
-        [(ngModel)]="pagination.currentPage"
-        (pageChanged)="pageChanged($event)"
-        previousText="&lsaquo;" 
-        nextText="&rsaquo;" 
-        firstText="&laquo;" 
-        lastText="&raquo;"
-        class="mojStil">
-    </pagination>
-    <div class="ml-3">
-        <span>Items per page:</span>
-        <select class="ml-1" [(ngModel)]="pagination.itemsPerPage" (ngModelChange)="itemsPerPageChanged($event)">
-            <option *ngFor="let size of pageSizes" [value]="size">{{ size }}</option>
-        </select>
-    </div>
-</div>
+
