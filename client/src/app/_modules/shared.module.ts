@@ -7,9 +7,10 @@ import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { SpaceSeparatedPipe } from '../_pipes/spaceSeparated.pipe';
 
 @NgModule({
-  declarations: [],
+  declarations: [SpaceSeparatedPipe],
   imports: [
     CommonModule,
     BsDropdownModule.forRoot(),
@@ -29,7 +30,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     BsDatepickerModule,
     ModalModule,
     NgxSpinnerModule,
-    PaginationModule
+    PaginationModule,
+    SpaceSeparatedPipe
   ],
 })
 export class SharedModule { }
