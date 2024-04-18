@@ -13,6 +13,7 @@ import { AssetResolver } from './_resolvers/asset/asset.resolver';
 import { ExpenseResolver } from './_resolvers/expense/expense.resolver';
 import { LearnMoreComponent } from './learn-more/learn-more.component';
 import { AboutMeComponent } from './about-me/about-me.component';
+import { MyAgGridComponent } from './my-ag-grid/my-ag-grid.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'server-error', component: ServerErrorComponent },
   { path: 'learn-more', component: LearnMoreComponent },
   { path: 'about-me', component: AboutMeComponent },
+  { path: 'my-ag-grid', component: MyAgGridComponent },
   { path: '**', component: NotFoundComponent, pathMatch: 'full' }, // wildcard route
 ];
 

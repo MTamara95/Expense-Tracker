@@ -28,6 +28,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { LearnMoreComponent } from './learn-more/learn-more.component';
 import { AboutMeComponent } from './about-me/about-me.component';
+import { MyAgGridComponent } from './my-ag-grid/my-ag-grid.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { AboutMeComponent } from './about-me/about-me.component';
     UserManagementComponent,
     RolesModalComponent,
     LearnMoreComponent,
-    AboutMeComponent
+    AboutMeComponent,
+    MyAgGridComponent
   ],
   imports: [
     BrowserModule,
