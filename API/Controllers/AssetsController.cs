@@ -1,11 +1,12 @@
-﻿using API.DTOs;
+﻿using Amazon;
+using Amazon.S3;
+using Amazon.S3.Model;
+using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace API.Controllers
 {
@@ -14,11 +15,35 @@ namespace API.Controllers
     {
         private readonly IMapper _mapper;
         private IAssetRepository _assetRepo;
+        private readonly IAmazonS3 _s3Client;
 
         public AssetsController(IAssetRepository assetRepo, IMapper mapper)
         {
             _assetRepo = assetRepo;
             _mapper = mapper;
+            _s3Client = new AmazonS3Client("AKIA4XXYVKGAYPGHS757", "Jbie+WYZHJmWLzmauobQCurpCMpMgdgqxznrS8Vz", RegionEndpoint.EUCentral1);
+        }
+
+        [HttpGet("getSignedUrl")]
+        public async Task<ActionResult<string>> GetSignedUrl(string bucketName, string objectKey)
+        {
+            try
+            {
+                var request = new GetPreSignedUrlRequest
+                {
+                    BucketName = bucketName,
+                    Key = objectKey,
+                    Verb = HttpVerb.GET,
+                    Expires = DateTime.UtcNow.AddMinutes(5) // URL will expire in 5 minutes
+                };
+
+                string url = await _s3Client.GetPreSignedURLAsync(request);
+                return Ok(JsonConvert.SerializeObject(url));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error generating signed URL: {ex.Message}");
+            }
         }
 
         [HttpGet]
