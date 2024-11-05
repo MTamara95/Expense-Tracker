@@ -21,7 +21,7 @@ namespace API.Controllers
         {
             _assetRepo = assetRepo;
             _mapper = mapper;
-            _s3Client = new AmazonS3Client("AKIA4XXYVKGAYPGHS757", "Jbie+WYZHJmWLzmauobQCurpCMpMgdgqxznrS8Vz", RegionEndpoint.EUCentral1);
+            _s3Client = new AmazonS3Client("testKey1", "testkey2", RegionEndpoint.EUCentral1);
         }
 
         [HttpGet("getSignedUrl")]
